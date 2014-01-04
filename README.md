@@ -6,6 +6,7 @@ SocialVibes (App Engine Project)
 
 - [SocialVibes Website](http://gcdc2013-socialvibes.appspot.com "Social Vibes")
 - [Google Cloud Developer Challenge 2013](http://www.google.com/events/gcdc2013/ "Google Cloud Developer Challenge 2013")
+- [SocialVibes Compute Engine Project](https://github.com/FraBle/SocialVibes-ComputeEngine "SocialVibes Compute Engine Project")
 
 ![SocialVibes Cover](https://raw.github.com/FraBle/SocialVibes-AppEngine/master/static/images/ui/cover.png "Social Vibes Cover")
 
