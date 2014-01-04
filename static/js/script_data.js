@@ -12,6 +12,7 @@ var playlist_id;
 var token;
 var storageAvailable;
 var skipGuide;
+var slideshowStarted = false;
 
 function login() {
     loggedIn = true;
@@ -192,6 +193,7 @@ function startSlideshow() {
     showNavigation();
     toggleFullScreen();
     loadPlaylist(playlist_id);
+    slideshowStarted = true;
 }
 
 function selectEvent() {

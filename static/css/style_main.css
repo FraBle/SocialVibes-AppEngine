@@ -60,7 +60,7 @@ img {
     border: none;
 }
 body {
-    overflow-y: hidden;
+    overflow-y: scroll;
     overflow-x: hidden !important;
     margin: 0px;
     background-color: #333;

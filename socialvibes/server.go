@@ -19,6 +19,7 @@ func init() {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/", handler.RootHandler).Methods("GET")
+	router.HandleFunc("/imprint", handler.ImprintHandler).Methods("GET")
 	router.HandleFunc("/events", handler.EventsHandler).Methods("GET")
 	router.HandleFunc("/events/gallery/{eventId}", handler.EventsGalleryHandler).Methods("GET")
 

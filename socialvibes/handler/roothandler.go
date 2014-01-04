@@ -30,3 +30,9 @@ func RootHandler(w http.ResponseWriter, r *http.Request) {
 	htmldoc := mustache.RenderFile("templates/index.html", variables)
 	fmt.Fprint(w, htmldoc)
 }
+
+// The RootHandler responds with the imprint page.
+func ImprintHandler(w http.ResponseWriter, r *http.Request) {
+	htmldoc := mustache.RenderFile("templates/imprint.html")
+	fmt.Fprint(w, htmldoc)
+}

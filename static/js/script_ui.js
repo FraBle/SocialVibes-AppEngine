@@ -327,7 +327,9 @@ function showNavigation() {
 
 function hideNavigation() {
     if (!navigation_hidden) {
-        document.body.style.overflowY = "hidden";
+        if (slideshowStarted) {
+            document.body.style.overflowY = "hidden";
+        }
         document.getElementById("navigation").style.opacity = 0;
         document.getElementById("controls").style.opacity = 0;
         hideBar("bar_1");
