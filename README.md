@@ -17,6 +17,73 @@ You can select one of the public events you've created with your Google+ account
 
 [![How to use SocialVibes](https://raw.github.com/FraBle/SocialVibes-AppEngine/master/static/images/ui/youtube.png)](http://www.youtube.com/watch?v=KCPR8WcQYIY)
 
+## How to set it up?
+
+##### You need a running SocialVibes Compute Engine instance!
+
+- You need Google Go (http://golang.org/doc/install) with all environment variables set
+- You need the Go App Engine SDK (https://developers.google.com/appengine/docs/go/gettingstarted/devenvironment)
+- Checkout the repository
+- You need an app.yaml file, something similar to this:
+
+```yaml
+application: <<Your Google Cloud Project ID>>
+version: 1
+runtime: go
+api_version: go1
+
+handlers:
+- url: /css
+  static_dir: static/css
+- url: /js
+  static_dir: static/js
+- url: /images
+  static_dir: static/images
+- url: /fonts
+  static_dir: static/fonts
+- url: /swfobject
+  static_dir: static/swfobject
+- url: /.*
+  script: _go_app
+
+inbound_services:
+- channel_presence
+```
+- You need a queue.yaml file, something similar to this:
+
+```yaml
+queue:
+- name: picture
+  mode: pull
+  acl:
+  - user_email: <<Compute Engine email Address>>
+  - user_email: <<Client ID email Address>>
+  - writer_email: <<Compute Engine email Address>>
+  - writer_email: <<Client ID email Address>>
+- name: picturerequest
+  mode: pull
+  acl:
+  - user_email: <<Compute Engine email Address>>
+  - user_email: <<Client ID email Address>>
+  - writer_email: <<Compute Engine email Address>>
+  - writer_email: <<Client ID email Address>>
+```
+_You can find these email addresses in the Google Cloud Console (APIs & auth > Credentials):_
+https://cloud.google.com/console
+_More information on queue configuration:_
+https://developers.google.com/appengine/docs/go/config/queue
+- You need a socialvibes.toml file under socialvibes/config/socialvibes.toml, e.g.:
+
+```toml
+computeEngineAddress = "<<IP>>:<<Port>>"
+[google]
+clientID = "<<Your Client ID for web application>>"
+clientSecret = "<<Your Client secret for web application>>"
+```
+_You can find the Client ID and secret in the Google Cloud Console (APIs & auth > Credentials):_
+https://cloud.google.com/console
+- You need to deploy the app with `goapp deploy`
+
 ## Used packages
 #### Google App Engine
 - [appengine](https://developers.google.com/appengine/docs/go/reference "appengine")
