@@ -1,0 +1,57 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color:#E5E5E5;
+}
+#fullscreenWrapper {
+    min-height: 100%;
+    /* Internet Explorer 10 */
+    display:-ms-flexbox;
+    -ms-flex-pack:center;
+    -ms-flex-align:center;
+    /* Firefox */
+    display:-moz-box;
+    -moz-box-pack:center;
+    -moz-box-align:center;
+    /* Safari, Chrome, and Opera */
+    display:-webkit-box;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+    /* W3C */
+    display:box;
+    box-pack:center;
+    box-align:center;
+}
+.tile {
+    color: #6f6f6f;
+    border-width:2px;
+    border-style:solid;
+}
+#showsWrapper {
+    border-color: #B3C833;
+}
+#showsPanel {
+    border-color: #B3C833;
+    background-color:#B3C833;
+}
+#profileWrapper {
+    border-color: #CE5043;
+}
+#profilePanel {
+    border-color: #CE5043;
+    background-color:#CE5043;
+}
+#eventsWrapper {
+    border-color: #FB8521;
+}
+#eventsPanel {
+    border-color: #FB8521;
+    background-color:#FB8521;
+}
+#playlistsWrapper {
+    border-color: #1AA1E1;
+}
+#playlistsPanel {
+    border-color: #1AA1E1;
+    background-color:#1AA1E1;
+}

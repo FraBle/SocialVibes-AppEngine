@@ -1,0 +1,387 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+* ===========================================================================
+* 
+* SocialVibes
+*
+* Copyright
+* 
+* Frank Blechschmidt (@frable90)
+* 
+* Stephan Schultz (@Steppschuh192)
+* www.steppschuh.net
+* 
+* ===========================================================================
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Social Vibes</title>
+    <meta name="description" content="Social Vibes visualizes your Google+ events. During an event, start the Social Vibes slideshow to show the latest event pictures combined with music of your choice." />
+    <meta name="viewport" content="width=1300">
+    <meta property="og:title" content="Social Vibes">
+    <meta property="og:url" content="http://gcdc2013-socialvibes.appspot.com/">
+    <meta property="og:description" content="Social Vibes visualizes your Google+ events. During an event, start the Social Vibes slideshow to show the latest event pictures combined with music of your choice.">
+
+    <link rel="icon" type="image/png" href="images/ui/logo_circle_200.png">
+
+    <link rel="stylesheet" type="text/css" href="css/style_main.css">
+    <script src="js/script_ui.js" type="text/javascript"></script>
+    <script src="js/script_data.js" type="text/javascript"></script>
+    <script src="js/script_player.js" type="text/javascript"></script>
+    <script src="js/script_channel.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+    <script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-45930768-1', 'gcdc2013-socialvibes.appspot.com');
+    ga('send', 'pageview');
+    </script>
+</head>
+
+<body onload="load();">
+    <div id="content">
+        <div id="background">
+            <div id="tile_0" class="tile">
+                <div id="tile_0_0" class="tile">
+                    <div class="tile_image">
+                        &nbsp;
+                    </div>
+
+                    <div id="music_text" class="tile_text">
+                        <div class="tile_header">Music</div>
+                        <h2>Presets:</h2>
+                        <input type="radio" name="music" value="PLp8iASaiMbWotCHMVAQnYOt4jgw_32DbK" checked>Chillstep
+                        <br>
+                        <input type="radio" name="music" value="PLp8iASaiMbWpYBSBv7m8qzBqkNe0EDpxj">House
+                        <br>
+                        <input type="radio" name="music" value="PLp8iASaiMbWrRu1z6ijK6Q_nnoIAl6CDh">Drumm and Bass
+                        <br>
+
+                        <h2>Link to YouTube playlist:</h2>
+                        <input id="tb_playlist" type="text" name="music">
+                        <br>
+                    </div>
+                    <div id="bar_music" class="bar">
+                        <div class="bar_content">
+                            <div id="music_button" onclick="selectMusic();">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tile_0_1" class="tile">
+                    <div class="tile_image">
+                        &nbsp;
+                    </div>
+
+                    <div id="login_text" class="tile_text">
+                        <div class="tile_header">Social Vibes</div>
+                        Social Vibes visualizes your Google+ events. During an event, start the Social Vibes slideshow to show the latest event pictures combined with music of your choice.
+                        <br/>
+                        <br/>Sign in with your Google account to select an event.
+                    </div>
+                    <div id="bar_login" class="bar">
+                        <div class="bar_content">
+                            <div id="login_button" onclick="">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="events_text" class="tile_text">
+                        <div class="tile_header">Event</div>
+                        <h2>Your events:</h2>
+                        <div id="event_na" style="display: none;">
+                            Looks like you have not created any public events yet. You can enter an event URL instead.<br>
+                        </div>
+                        <div id="event_list">
+
+                        </div>
+
+                        <h2>Link to Google+ event:</h2>
+                        <input id="tb_event" type="text" name="event">
+                        <br>
+                    </div>
+                    <div id="bar_events" class="bar">
+                        <div class="bar_content">
+                            <div id="event_button" onclick="selectEvent();">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="slideshow_text" class="tile_text">
+                        <div class="tile_header">Slideshow</div>
+                        When you are ready, click start and your selected playlist will start playing.
+                        <br>
+                        <br>Enjoy your event!
+                    </div>
+                    <div id="bar_slideshow" class="bar">
+                        <div class="bar_content">
+                            <div id="slideshow_button" onclick="startSlideshow();">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                &nbsp;
+            </div>
+
+            <div id="tile_1" class="tile">
+                <div class="tile_image">
+                    &nbsp;
+                </div>
+                <div id="bar_1" class="bar">
+                    <div class="bar_content">
+                        <div id="navigation_bar">
+                            <div id="navigation">
+                                <div class="nav_item ui_back" onclick="showInfo();">
+                                    <div class="nav_item_icon" style="background-image: url(images/ui/icon_info.png);">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                                &nbsp;
+                            </div>
+                            <div id="controls">
+                                <div class="nav_item ui_back" onclick="toggleFullScreen();">
+                                    <div class="nav_item_icon" style="background-image: url(images/ui/icon_fullscreen.png);">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                                <div id="volume_container" class="nav_item ui_back" onmouseover="showVolumeControl();" onmouseout="hideVolumeControl();" style="cursor: default;">
+                                    <div class="nav_item_icon" style="background-image: url(images/ui/icon_volume.png);">
+                                        &nbsp;
+                                    </div>
+                                    <div id="volume_buttons">
+                                        <div id="volume_down" onclick="volumeDown();">
+                                            &nbsp;
+                                        </div>
+                                        <div id="volume_up" onclick="volumeUp();">
+                                            &nbsp;
+                                        </div>
+                                        <div id="volume_percentage" class="percentage">
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav_item ui_back" onclick="togglePause();">
+                                    <div class="nav_item_icon" style="background-image: url(images/ui/icon_pause.png);" id="button_play">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                                <div class="nav_item ui_back" onclick="playNext();">
+                                    <div class="nav_item_icon" style="background-image: url(images/ui/icon_next.png);">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                    &nbsp;
+                </div>
+            </div>
+
+            <div id="tile_2" class="tile">
+                <div class="tile_image">
+                    &nbsp;
+                </div>
+                <div id="bar_2" class="bar">
+                    <div class="bar_content">
+                        <div id="event_title">
+                            <div class="g-plusone" data-size="tall" data-href="https://plus.google.com/118015654972563976379"></div>
+                            &nbsp;Social Vibes
+                        </div>
+                    </div>
+                    &nbsp;
+                </div>
+            </div>
+
+            <div id="tile_3" class="tile">
+                <div class="tile_image">
+                    &nbsp;
+                </div>
+                <div id="bar_3" class="bar">
+                    <div class="bar_content">
+                        <div id="event_stats">
+                            For Google+ Events
+                        </div>
+                    </div>
+                    &nbsp;
+                </div>
+            </div>
+            &nbsp;
+        </div>
+
+        <div id="track" onclick="showInfo();">
+            <div id="track_title_container">
+                <div id="track_buttons">
+                    &nbsp;
+                </div>
+                <div id="track_title" class="ui_back">
+                    <div id="track_title_value">
+                        &nbsp;
+                    </div>
+                    <div id="percentage" class="percentage">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+            <div id="track_artist" class="ui_back">
+                <div id="track_artist_value">
+                    &nbsp;
+                </div>
+            </div>
+            &nbsp;
+        </div>
+        &nbsp;
+    </div>
+
+    <div class="seperator black_gradient">
+        &nbsp;
+    </div>
+    <div id="details_track" class="section">
+        <h1>Now playing</h1>
+        <p>
+            You are currently listening to&nbsp;
+            <span id="details_track_title_value">Unknown</span>. It is part of the &nbsp;
+            <span id="details_track_playlist_value">Unknown</span>&nbsp;playlist.
+        </p>
+        <table width="100%" border="0" cellspacing="0px">
+            <tr>
+                <td width="200">Video</td>
+                <td><a id="details_url_video_value" href="" target="_blank">Unknown</a>
+                </td>
+            </tr>
+            <tr>
+                <td width="200">Playlist</td>
+                <td><a id="details_url_playlist_value" href="" target="_blank">Unknown</a>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <p>
+            Share your current slideshow:<br>
+            <a id="details_url_share" href="" target="_blank">Unknown</a>
+        </p>
+    </div>
+    <div id="info" class="section">
+        <h1>About</h1>
+        <p>
+            Social Vibes visualizes any public Google+ event. During an event, you can start the Social Vibes slideshow to show the latest event pictures combined with music of your choice.
+        </p>
+        <p>
+            You can select one of the events you’ve created with your Google+ account or any public event by pasting the URL. For the music, you can select one of our suggestions or paste any YouTube playlist URL. After selecting an event and a playlist, you can start the slideshow.
+        </p>
+        <br>
+        <div class="g-page" data-href="https://plus.google.com/118015654972563976379" data-theme="dark" data-layout="landscape" data-rel="publisher"></div>
+
+        <script type="text/javascript">
+          (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/platform.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+          })();
+        </script>
+    </div>
+
+    <div id="details" class="section">
+        <h1>How it works</h1>
+        <p>
+            To get access to a user account, we use a custom client-side Google+ sign-in. When logged in, our Google Go backend uses the Google+ API to retrieve all public events created by that user.
+        </p>
+        <p>
+            The user can now select an event and the backend loads more details and a photo stream for the given event. To do that, the Google App Engine starts the Google Compute Engine, which renders the event page using <a href="https://github.com/sourcegraph/webloop" target="_blank">webloop</a> and parses it using <a href="https://github.com/PuerkitoBio/goquery" target="_blank">goquerry</a>. We had to use the detour via the Compute Engine, because there is currently no API call for Google+ events and photos available.
+        </p>
+        <p>
+            When the Compute Engine has extracted the photos from the given event, the App Engine starts communicating with the client frontend using the App Engine’s Channels. The communication between Compute Engine and App Engine is handled via tasks.
+        </p>
+        <p>
+            After the initial loading of event details and photo stream, the client keeps requesting for new photos.
+        </p>
+    </div>
+
+    <br>
+    <div id="footer">
+        <div id="video">
+            <script type="text/javascript" src="swfobject/swfobject.js"></script>
+            <div id="ytapiplayer">
+                You need Flash player 8+ and JavaScript enabled.
+            </div>
+
+            <script type="text/javascript">
+            var params = {
+                allowScriptAccess: "always"
+            };
+            var atts = {
+                id: "myytplayer"
+            };
+            swfobject.embedSWF("https://www.youtube.com/v/videoseries?listType=playlist&list=PL9497B421C51F8431&enablejsapi=1&playerapiid=ytplayer&version=3&autoplay=0", "ytapiplayer", "560", "315", "8", null, null, params, atts);
+            </script>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>&nbsp;
+
+    <div id="guide">
+        <div id="guide_caption">
+            How to use SocialVibes
+        </div>
+        <div id="guide_video">
+            <iframe width="640" height="360" src="//www.youtube.com/embed/KCPR8WcQYIY" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div id="guide_close" onclick="fadeOutGuide();">
+            &nbsp;
+        </div>
+    </div>
+
+    <div id="overlay">
+        <div id="overlay_logo">
+            &nbsp;
+        </div>
+        <div id="overlay_caption">
+            Loading resources
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    (function() {
+        var po = document.createElement('script');
+        po.type = 'text/javascript';
+        po.async = true;
+        po.src = 'https://apis.google.com/js/client:plusone.js?onload=render';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(po, s);
+    })();
+
+    function render() {
+        gapi.signin.render('login_button', {
+            'callback': 'loginCallback',
+            'clientid': '{{ClientID}}',
+            'cookiepolicy': 'single_host_origin',
+            //'requestvisibleactions': 'http://schemas.google.com/AddActivity',
+            'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/calendar.readonly'
+        });
+    }
+    </script>
+</body>
+
+</html>
