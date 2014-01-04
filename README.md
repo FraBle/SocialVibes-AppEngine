@@ -1,7 +1,8 @@
-SocialVibes (App Engine)
+SocialVibes (GAE Project)
 =====================
 
 [![GoDoc](https://godoc.org/github.com/FraBle/SocialVibes-AppEngine/socialvibes?status.png)](https://godoc.org/github.com/FraBle/SocialVibes-AppEngine/socialvibes)
+[![Google+ SocialVibes](http://b.repl.ca/v1/Google+-SocialVibes-brightgreen.png)] (https://plus.google.com/118015654972563976379/)
 
 - [SocialVibes Website](http://gcdc2013-socialvibes.appspot.com "Social Vibes")
 - [Google Cloud Developer Challenge 2013](http://www.google.com/events/gcdc2013/ "Google Cloud Developer Challenge 2013")
