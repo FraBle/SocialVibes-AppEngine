@@ -1,4 +1,4 @@
-SocialVibes (Google App Engine Project)
+SocialVibes (App Engine)
 =====================
 
 [![GoDoc](https://godoc.org/github.com/FraBle/SocialVibes-AppEngine/socialvibes?status.png)](https://godoc.org/github.com/FraBle/SocialVibes-AppEngine/socialvibes)
