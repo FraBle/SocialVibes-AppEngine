@@ -122,7 +122,7 @@ function getEventList() {
 
 function getEventPictures(event_id) {
     this.event_id = event_id;
-    setOverlayCaption("Loading event pictures");
+    setOverlayCaption("Loading event pictures<br>This may take a few seconds");
     showOverlay();
     try {
         var url = getCurrentUrl() + "token/" + userId + "/" + event_id;
