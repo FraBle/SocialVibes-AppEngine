@@ -25,10 +25,10 @@ var sessionStore = gaesessions.NewMemcacheDatastoreStore("", "", gaesessions.Def
 
 // Token represents an OAuth token response.
 type Token struct {
-	AccessToken string `json:"access_token"`
-	TokenType   string `json:"token_type"`
-	ExpiresIn   int    `json:"expires_in"`
-	IdToken     string `json:"id_token"`
+	AccessToken 	string `json:"access_token"`
+	TokenType   	string `json:"token_type"`
+	ExpiresIn   	int    `json:"expires_in"`
+	IdToken     	string `json:"id_token"`
 }
 
 // ClaimSet represents an IdToken response.

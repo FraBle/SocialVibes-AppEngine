@@ -20,6 +20,7 @@ func ConnectHandler(w http.ResponseWriter, r *http.Request) {
 	// Get the one time code from the GET parameter
 	vars := mux.Vars(r)
 	code := vars["code"]
+
 	// Replace the escaped forward slahes
 	code = strings.Replace(code, "[s]", "/", -1)
 
@@ -32,16 +33,10 @@ func ConnectHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Check if the user is already connected
-	storedToken := session.Values["accessToken"]
-	storedGPlusID := session.Values["gplusID"]
-
-	if storedToken == nil || storedGPlusID != gplusID {
-		// Store the access token and user ID in the session for later use
-		session.Values["accessToken"] = accessToken
-		session.Values["gplusID"] = gplusID
-		session.Save(r, w)
-	}
+	// Always store hte new access token in the session
+	session.Values["accessToken"] = accessToken
+	session.Values["gplusID"] = gplusID
+	session.Save(r, w)
 
 	// Send the Google+ user ID as response
 	var response = map[string]string{
