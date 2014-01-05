@@ -8,14 +8,14 @@ import (
 )
 
 var (
-	// Google_clientID is the client ID for OAuthConfig.
+	// GoogleClientID is the client ID for OAuthConfig.
 	// It's stored inside the config TOML file for security reasons.
 	GoogleClientID     = config.String("google.clientID", "Unknown")
-	// Google_clientSecret is the client secret for OAuthConfig.
+	// GoogleClientSecret is the client secret for OAuthConfig.
 	// It's stored inside the config TOML file for security reasons.
 	GoogleClientSecret = config.String("google.clientSecret", "Unknown")
 	// OAuthConfig is the used configuration for every Google API access.
-	OAuthConfig             = &oauth.Config{
+	OAuthConfig        = &oauth.Config{
 		Scope:    "https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/calendar.readonly",
 		AuthURL:  "https://accounts.google.com/o/oauth2/auth",
 		TokenURL: "https://accounts.google.com/o/oauth2/token",

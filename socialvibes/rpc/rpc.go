@@ -29,7 +29,7 @@ type EventReply struct {
 type EventService struct{}
 
 // PullTask is the only service method of EventService.
-// It prechecks the RPC parameter, calls PullTasks() and sets the reply message.
+// It pre-checks the RPC parameter, calls PullTasks() and sets the reply message.
 // It returns any error encountered. 
 func (eventService *EventService) PullTask(r *http.Request, args *EventArgs, reply *EventReply) error {
 	// Pre-check the given pull type
