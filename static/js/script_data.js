@@ -86,10 +86,19 @@ function getEventList() {
                         var event_name = response_data[i].name;
                         var event_url = response_data[i].url;
 
+                        var event_visibility = response_data[i].visibility;
+                        var event_ispublic;
+                        if (event_visibility == "private") {
+                            event_ispublic = false;
+                        } else {
+                            event_ispublic = true;
+                        }
+
                         var event_new = new Array();
                         event_new.id = event_id;
                         event_new.name = event_name;
                         event_new.url = event_url;
+                        event_new.ispublic = event_ispublic;
 
                         addEventToSelector(event_new);
 
@@ -101,6 +110,7 @@ function getEventList() {
                     event_new.id = "c68j7ef8p368b8018bhpn3kjptc";
                     event_new.name = "Sample Event";
                     event_new.url = "https://plus.google.com/events/c68j7ef8p368b8018bhpn3kjptc";
+                    event_new.ispublic = true;
 
                     addEventToSelector(event_new);
 
@@ -228,8 +238,14 @@ function selectEvent() {
         } else {
             console.log("Loading pictures for " + event_id);
         }
-        getEventPictures(event_id);
-        selectedEvent = true;
+
+        if (event_cur.ispublic) {
+            getEventPictures(event_id);
+            selectedEvent = true;
+        } else {
+            selectedEvent = false;
+            alert("This is event is private, please select a public event.");
+        }
     }
     checkSelection();
 }

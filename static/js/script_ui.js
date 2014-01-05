@@ -115,13 +115,26 @@ function tileStruct(div, lastChanged, isPortrait) {
 
 function addEventToSelector(event_cur) {
     var list = document.getElementById("event_list");
-    // <input type="radio" name="event" value="0" checked>Test Event
     var event_radio = document.createElement('input');
     event_radio.setAttribute('type', 'radio');
     event_radio.setAttribute('name', 'event');
     event_radio.setAttribute('value', event_cur.id);
 
-    var event_name = document.createTextNode(event_cur.name);
+    var event_name;
+    if (event_cur.ispublic) {
+        event_name = document.createTextNode(event_cur.name);
+    } else {
+        //event_name = document.createTextNode("Private: " + event_cur.name);
+        event_radio.setAttribute('disabled', "true");
+        event_radio.setAttribute('class', "radio_disabled hint--top");
+        event_radio.setAttribute('data-hint', "This event is private, please select a public event.");
+        
+        event_name = document.createElement("span");
+
+        event_title = document.createTextNode(event_cur.name);
+        event_name.appendChild(event_title);
+    }
+
     var br = document.createElement("br");
 
     list.appendChild(event_radio);
