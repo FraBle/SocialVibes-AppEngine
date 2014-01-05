@@ -1,3 +1,4 @@
+// Package model contains the struct for a Google+ event.
 package model
 
 // The Event type represents a Google+ event and is the used data object between frontend and backend.
