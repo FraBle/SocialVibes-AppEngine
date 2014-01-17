@@ -208,14 +208,17 @@ function startSlideshow() {
 
 function selectEvent() {
     var event_id;
+    var isCustomUrl;
     var tb_value = document.getElementById("tb_event").value;
     if (document.getElementById("tb_event").value.length > 5) {
+        isCustomUrl = true;
         if (tb_value.indexOf("events/") != -1) {
             event_id = tb_value.substr(tb_value.indexOf("events/") + 7);
         } else {
             alert("This is not a valid Google+ event url.");
         }
     } else {
+        isCustomUrl = false;
         var radios = document.getElementsByName("event");
         for (var i = 0; i < radios.length; i++) {
             if (radios[i].checked) {
@@ -239,7 +242,7 @@ function selectEvent() {
             console.log("Loading pictures for " + event_id);
         }
 
-        if (event_cur.ispublic) {
+        if (event_cur.ispublic || isCustomUrl) {
             getEventPictures(event_id);
             selectedEvent = true;
         } else {
