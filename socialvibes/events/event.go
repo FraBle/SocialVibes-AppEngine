@@ -97,9 +97,9 @@ func RefreshEventGallery(context appengine.Context, eventId string) (err error) 
     context.Infof("events > event.go > RefreshEventGallery > client.Transport.Deadline: %v", client.Transport.(*urlfetch.Transport).Deadline)
 
     resp, err := client.Post("http://" + *config.ComputeEngineAddress +"/rpc", "application/json", strings.NewReader(req))
-    context.Infof("events > event.go > RefreshEventGallery > client.Post(); StatusCode: %v; Status: %s", resp.StatusCode, resp.Status)
     if err != nil || resp.StatusCode != 200 {
         context.Errorf("events > event.go > RefreshEventGallery > client.Post(): %v", err)
+        context.Errorf("events > event.go > RefreshEventGallery > client.Post(); StatusCode: %v; Status: %s", resp.StatusCode, resp.Status)
     }
 
 	return nil
