@@ -4,8 +4,8 @@ package events
 
 import (
 	"appengine"
-	"appengine/urlfetch"
 	"appengine/taskqueue"
+	"appengine/urlfetch"
 
 	"strings"
 	"time"
@@ -19,7 +19,7 @@ import (
 
 // ParseEventInfos uses the Google Calendar API to aggregate all event information since a month ago.
 // It picks out all Google+ events by looking for the corresponding event link.
-// It returns all found events as array and any error encountered. 
+// It returns all found events as array and any error encountered.
 func ParseEventInfos(transport *oauth.Transport, context appengine.Context) (events []*model.Event, err error) {
 	// Create an API service
 	service, err := calendar.New(transport.Client())
@@ -73,9 +73,9 @@ func RefreshEventGallery(context appengine.Context, eventId string) (err error) 
 	// Create a task for a pull queue
 	// Tags are used for grouping tasks inside the Compute Engine
 	task := &taskqueue.Task{
-	    Payload: []byte(eventId),
-	    Method:  "PULL",
-	    Tag: eventId, 
+		Payload: []byte(eventId),
+		Method:  "PULL",
+		Tag:     eventId,
 	}
 	// Insert the created task into the App Engine Task Queue
 	_, err = taskqueue.Add(context, task, "picturerequest")
@@ -84,23 +84,21 @@ func RefreshEventGallery(context appengine.Context, eventId string) (err error) 
 		return
 	}
 
-    // Wait 3 seconds till the task is definitely in the task queue 
-    time.Sleep(3 * time.Second)
+	// Wait 3 seconds till the task is definitely in the task queue
+	time.Sleep(3 * time.Second)
 
-    // Notify the task consumer in the Compute Engine via RPC
-    req := `{"method":"EventService.PullTask","params":[{"PullType":"picturerequest", "EventId":"` + eventId + `"}], "id":"1"}`
-    
-    // Make a secure POST request via App Engine URL Fetch service
-    client := urlfetch.Client(context)
-    // Increase default deadline to 60 seconds
-    client.Transport.(*urlfetch.Transport).Deadline = time.Minute
-    context.Infof("events > event.go > RefreshEventGallery > client.Transport.Deadline: %v", client.Transport.(*urlfetch.Transport).Deadline)
+	// Notify the task consumer in the Compute Engine via RPC
+	req := `{"method":"EventService.PullTask","params":[{"PullType":"picturerequest", "EventId":"` + eventId + `"}], "id":"1"}`
 
-    resp, err := client.Post("http://" + *config.ComputeEngineAddress +"/rpc", "application/json", strings.NewReader(req))
-    if err != nil || resp.StatusCode != 200 {
-        context.Errorf("events > event.go > RefreshEventGallery > client.Post(): %v", err)
-        context.Errorf("events > event.go > RefreshEventGallery > client.Post(); StatusCode: %v; Status: %s", resp.StatusCode, resp.Status)
-    }
+	// Make a secure POST request via App Engine URL Fetch service
+	client := urlfetch.Client(context)
+	// Increase default deadline to 55 seconds
+	client.Transport.(*urlfetch.Transport).Deadline = 55 * time.Second
+
+	resp, err := client.Post("http://"+*config.ComputeEngineAddress+"/rpc", "application/json", strings.NewReader(req))
+	if err != nil || resp.StatusCode != 200 {
+		context.Errorf("events > event.go > RefreshEventGallery > client.Post(): %v; StatusCode: %v;", err, resp.StatusCode)
+	}
 
 	return nil
 }
