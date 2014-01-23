@@ -210,7 +210,7 @@ function selectEvent() {
     var event_id;
     var isCustomUrl;
     var tb_value = document.getElementById("tb_event").value;
-    if (document.getElementById("tb_event").value.length > 5) {
+    if (tb_value.length > 5) {
         isCustomUrl = true;
         if (tb_value.indexOf("events/") != -1) {
             event_id = tb_value.substr(tb_value.indexOf("events/") + 7);
@@ -242,7 +242,7 @@ function selectEvent() {
             console.log("Loading pictures for " + event_id);
         }
 
-        if (event_cur.ispublic || isCustomUrl) {
+        if (isCustomUrl || event_cur.ispublic) {
             getEventPictures(event_id);
             selectedEvent = true;
         } else {
